@@ -48,22 +48,22 @@ window.onload = async function () {
 
   Telegram.WebApp.onEvent("mainButtonClicked", async function () {
       let pingResponse;
-  try {
-    pingResponse = await fetch(API_URL_PING + '?' + new URLSearchParams({query_id: tg.initDataUnsafe.query_id,}),
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    if (pingResponse.status !== 200) {
-      throw error;
-    }
-  } catch (error) {
-    startPage.style.display = "block";
-    tg.showAlert(error);
-    return;
-  }
+      try {
+        pingResponse = await fetch(API_URL_PING + '?' + new URLSearchParams({query_id: tg.initDataUnsafe.query_id,}),
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        if (pingResponse.status !== 200) {
+          throw error;
+        }
+      } catch (error) {
+        startPage.style.display = "block";
+        tg.showAlert(error);
+        return;
+      }
   });
 };

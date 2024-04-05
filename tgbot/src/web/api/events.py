@@ -4,7 +4,6 @@ from src.web import web_logger
 
 
 async def connect(sid, data):
-    print('sockonnect')
     web_logger.info(f"connect | socket connection open | sid: {sid}")
 
 
