@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+    gateway:
+        build:
+            context: ../
+            dockerfile: ./build/Dockerfile
+        ports:
+            - "80:80"
+            - "443:443"
+        user: "1000:1000"
+        restart: unless-stopped
+        container_name: gateway
