@@ -21,6 +21,7 @@ async def webhook_startup(dispatcher: Dispatcher, bot: Bot) -> None:
             url=webhook_url,
             allowed_updates=dispatcher.resolve_used_update_types(),
             drop_pending_updates=settings.bot.DROP_PENDING_UPDATES,
+            secret_token=settings.bot.WEBHOOK_SECRET.get_secret_value(),
     ):
         return bot_logger.info(f"Bot webhook successfully set on url {webhook_url}")
     return bot_logger.error(f"Failed to set main bot webhook on url {webhook_url}")

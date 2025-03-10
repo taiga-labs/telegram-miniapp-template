@@ -4,7 +4,6 @@ from urllib import parse
 
 from aiogram import types
 from fastapi import APIRouter, HTTPException
-from fastapi.params import Depends
 from starlette import status
 
 from api import create_bot
