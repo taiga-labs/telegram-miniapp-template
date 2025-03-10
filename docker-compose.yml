@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+    bot:
+        build:
+            context: backend/bot
+            dockerfile: Dockerfile
+        command: python main.py
+        user: "1000:1000"
+        restart: unless-stopped
+        container_name: bot
+        env_file: .env
+        networks:
+            testnet:
+                aliases:
+                    - bot
+
+    webapp_back:
+        build:
+            context: backend/webapp
+            dockerfile: Dockerfile
+        command: python main.py
+        user: "1000:1000"
+        restart: unless-stopped
+        container_name: webapp_back
+        env_file: .env
+        expose:
+            - 8080
+        networks:
+            testnet:
+                aliases:
+                    - webapp_back
+
+    webapp_front:
+        build:
+            context: frontend
+            dockerfile: Dockerfile
+        user: "1000:1000"
+        restart: unless-stopped
+        container_name: webapp_front
+        expose:
+            - 80
+        networks:
+            testnet:
+                aliases:
+                    - webapp_front
+
+    gateway:
+        build:
+            context: gateway
+            dockerfile: Dockerfile
+        user: "1000:1000"
+        restart: unless-stopped
+        container_name: gateway
+        ports:
+            - "443:443"
+        networks:
+            testnet:
+                aliases:
+                    - gw
+
+networks:
+    testnet:
+        external: false
+        name: testnet
